@@ -32,14 +32,14 @@ class UserDataService {
         var r, g, b, a: NSString?
         
         let scanner = Scanner(string: components)
-        scaner.charactersToBeSkipped = CharacterSet(charactersIn: "[], ")
+        scanner.charactersToBeSkipped = CharacterSet(charactersIn: "[], ")
         
-        scanner.scanUpToCharacters(from: CharacterSet(chactersIn: ","), into: &r)
-        scanner.scanUpToCharacters(from: CharacterSet(chactersIn: ","), into: &g)
-        scanner.scanUpToCharacters(from: CharacterSet(chactersIn: ","), into: &b)
-        scanner.scanUpToCharacters(from: CharacterSet(chactersIn: ","), into: &a)
+        scanner.scanUpToCharacters(from: CharacterSet(charactersIn: ","), into: &r)
+        scanner.scanUpToCharacters(from: CharacterSet(charactersIn: ","), into: &g)
+        scanner.scanUpToCharacters(from: CharacterSet(charactersIn: ","), into: &b)
+        scanner.scanUpToCharacters(from: CharacterSet(charactersIn: ","), into: &a)
         
-        guard let rUnwrapped = r, gUnwrapped = g, bUnwrapped = b, aUnwrapped = a
+        guard let rUnwrapped = r, let gUnwrapped = g, let bUnwrapped = b, let aUnwrapped = a
             else { return UIColor.lightGray}
 
         return UIColor(red: CGFloat(rUnwrapped.doubleValue),
@@ -57,5 +57,6 @@ class UserDataService {
         AuthService.instance.isLoggedIn = false
         AuthService.instance.userEmail = ""
         AuthService.instance.authToken = ""
+        MessageService.instance.clearChannels()
     }
 }
